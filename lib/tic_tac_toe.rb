@@ -20,26 +20,26 @@ WIN_COMBINATIONS = [
    puts "-----------"
    puts " #{@board[6]} | #{@board[7]} | #{@board[8]} "
  end
- 
+
  def input_to_index (input)
    index = input.to_i
    index -= 1
    return index
  end
- 
+
  def move (index, pcharacter)
    @board[index] = pcharacter
    return @board
  end
- 
+
  def position_taken? (index)
    !(@board[index].nil? || @board[index] == " ")
  end
- 
+
  def valid_move? (index)
    index >=0 && index <=8 && !position_taken?(index)
  end
- 
+
  def turn
    puts "Please enter 1-9:"
    input = gets.chomp
@@ -52,7 +52,7 @@ WIN_COMBINATIONS = [
      turn
    end
  end
- 
+
  def turn_count
    turnc = 0
    @board.each do |index|
@@ -62,7 +62,7 @@ WIN_COMBINATIONS = [
    end
    return turnc
  end
- 
+
  def current_player
    who_turn = turn_count
      if who_turn % 2 == 0
@@ -72,17 +72,17 @@ WIN_COMBINATIONS = [
      end
      return player
  end
- 
+
  def won?
    WIN_COMBINATIONS.each {|win_comb|
       win_index_1 = win_comb[0]
       win_index_2 = win_comb[1]
       win_index_3 = win_comb[2]
- 
+
       position_1 = @board[win_index_1]
       position_2 = @board[win_index_2]
       position_3 = @board[win_index_3]
- 
+
       if position_1 == "X" && position_2 == "X" && position_3 == "X"
         return win_comb
       elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
@@ -91,7 +91,7 @@ WIN_COMBINATIONS = [
     }
     return false
  end
- 
+
  def full?
    @board.all? {|x| x == "X" || x == "O"}
  end
@@ -102,7 +102,7 @@ WIN_COMBINATIONS = [
      return false
    end
  end
- 
+
  def over?
    if won? || draw?
      return true
@@ -110,7 +110,7 @@ WIN_COMBINATIONS = [
      return false
    end
  end
- 
+
  def winner
    index = []
    index = won?
@@ -124,7 +124,7 @@ WIN_COMBINATIONS = [
      end
    end
  end
- 
+
  def play
    until over? == true do
      turn
